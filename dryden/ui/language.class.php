@@ -18,7 +18,7 @@ class ui_language {
      * Used to translate a text string into the language preference of the user.
      * @author Pascal Peyremorte (p.peyremorte@wanadoo.fr)
      * @global db_driver $zdbh The ZPX database handle.
-     * @param $message The string to translate.
+     * @param $message string The string to translate.
      * @return string The transalated string.
      */
     static function translate($message) {
