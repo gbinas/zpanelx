@@ -1633,6 +1633,7 @@ class module_controller {
                 $checkline = "$" . "TTL 10800" . fs_filehandler::NewLine();
                 $checkline .= "@ IN SOA " . $domain['dn_name_vc'] . ".    ";
                 $checkline .= "postmaster." . $domain['dn_name_vc'] . ". (" . fs_filehandler::NewLine();
+	            //TODO: Use user-defined serial, suggest today's serial with auto-advance of 2 last digits
                 $checkline .= "                       " . date("Ymdt") . "	;serial" . fs_filehandler::NewLine();
                 $checkline .= "                       " . ctrl_options::GetSystemOption('refresh_ttl') . "      ;refresh after 6 hours" . fs_filehandler::NewLine();
                 $checkline .= "                       " . ctrl_options::GetSystemOption('retry_ttl') . "       ;retry after 1 hour" . fs_filehandler::NewLine();
