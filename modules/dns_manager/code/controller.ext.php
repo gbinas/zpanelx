@@ -1550,7 +1550,7 @@ class module_controller
 
     static function IsValidIP( $ip )
     {
-        if ( filter_var( $ip, FILTER_VALIDATE_IP, FILTER_FLAG_NO_PRIV_RANGE | FILTER_FLAG_NO_RES_RANGE ) ) {
+        if ( filter_var( $ip, FILTER_VALIDATE_IP ) ) {
             return TRUE;
         }
         else {
@@ -1560,7 +1560,7 @@ class module_controller
 
     static function IsValidIPv4( $ip )
     {
-        if ( filter_var( $ip, FILTER_VALIDATE_IP, FILTER_FLAG_IPV4 | FILTER_FLAG_NO_PRIV_RANGE | FILTER_FLAG_NO_RES_RANGE ) ) {
+        if ( filter_var( $ip, FILTER_VALIDATE_IP, FILTER_FLAG_IPV4 ) ) {
             return TRUE;
         }
         else {
@@ -1570,7 +1570,7 @@ class module_controller
 
     static function IsValidIPv6( $ip )
     {
-        if ( filter_var( $ip, FILTER_VALIDATE_IP, FILTER_FLAG_IPV6 | FILTER_FLAG_NO_PRIV_RANGE | FILTER_FLAG_NO_RES_RANGE ) ) {
+        if ( filter_var( $ip, FILTER_VALIDATE_IP, FILTER_FLAG_IPV6 ) ) {
             return TRUE;
         }
         else {
@@ -1691,6 +1691,7 @@ class module_controller
                 $checkline      = "$" . "TTL 10800" . fs_filehandler::NewLine();
                 $checkline .= "@ IN SOA " . $domain[ 'dn_name_vc' ] . ".    ";
                 $checkline .= "postmaster." . $domain[ 'dn_name_vc' ] . ". (" . fs_filehandler::NewLine();
+                //TODO: Fix serial number to correctly add 2digit day serial
                 $checkline .= "                       " . date( "Ymdt" ) . "	;serial" . fs_filehandler::NewLine();
                 $checkline .= "                       " . ctrl_options::GetSystemOption( 'refresh_ttl' ) . "      ;refresh after 6 hours" . fs_filehandler::NewLine();
                 $checkline .= "                       " . ctrl_options::GetSystemOption( 'retry_ttl' ) . "       ;retry after 1 hour" . fs_filehandler::NewLine();
