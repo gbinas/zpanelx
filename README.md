@@ -1,9 +1,10 @@
 #ZPanelCP
 
-* Version: 10.0.2
+* Version: 10.1.0
 * [Website](http://www.zpanelcp.com/)
 * [Documentation](http://www.zpanelcp.com/support/documentation/)
 * [Forums](http://forums.zpanelcp.com/) for comments, discussion and community support
+* [Bug Tracker](http://bugs.zpanelcp.com/) for any bugs or security related issues.
 
 ##Description
 
@@ -24,9 +25,3 @@ ZPanel is licensed under the GNU GENERAL PUBLIC LICENSE (GPL v3) you can view a 
 ##Getting support
 
 We provide excellent free (and premium) [support](http://www.zpanelcp.com/support/) and [documentation](http://www.zpanelcp.com/support/documentation/) at our website.
-
-##Other support resources
-
-* [Our official community support forums](http://forums.zpanelcp.com/)
-* [Our official bug tracking system](http://bugs.zpanelcp.com/)
-* [Our official documentation](http://www.zpanelcp.com/support/documentation/)

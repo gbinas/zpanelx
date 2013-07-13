@@ -11,7 +11,7 @@
  * @author    Michael Cramer <BigMichi1@users.sourceforge.net>
  * @copyright 2009 phpSysInfo
  * @license   http://opensource.org/licenses/gpl-2.0.php GNU General Public License
- * @version   SVN: $Id: index.php 412 2010-12-29 09:45:53Z Jacky672 $
+ * @version   SVN: $Id: index.php 687 2012-09-06 20:54:49Z namiltd $
  * @link      http://phpsysinfo.sourceforge.net
  */
 /**
@@ -40,16 +40,16 @@ if (version_compare("5.2", PHP_VERSION, ">")) {
 require_once APP_ROOT . '/includes/autoloader.inc.php';
 
 // Load configuration
-if (!is_readable(APP_ROOT . '/config.php')) {
+require_once APP_ROOT . '/config.php';
+
+if (!defined('PSI_CONFIG_FILE') || !defined('PSI_DEBUG')) {
     $tpl = new Template("/templates/html/error_config.html");
     echo $tpl->fetch();
     die();
-} else {
-    include_once APP_ROOT . '/config.php';
 }
 
 // redirect to page with and without javascript
-$display = isset($_GET['disp']) ? $_GET['disp'] : PSI_DEFAULT_DISPLAY_MODE;
+$display = isset($_GET['disp']) ? $_GET['disp'] : strtolower(PSI_DEFAULT_DISPLAY_MODE);
 switch ($display) {
     case "static":
         $webpage = new WebpageXSLT();
@@ -68,4 +68,3 @@ switch ($display) {
         echo $tpl->fetch();
         break;
 }
-?>

@@ -1,7 +1,7 @@
 <?php
 
 echo fs_filehandler::NewLine() . "START DNS Manager Hook" . fs_filehandler::NewLine();
-if ( ui_module::CheckModuleEnabled( 'Backup Config' ) ) {
+if ( ui_module::CheckModuleEnabled( 'DNS Config' ) ) {
     echo "DNS Manager module ENABLED..." . fs_filehandler::NewLine();
     if ( !fs_director::CheckForEmptyValue( ctrl_options::GetSystemOption( 'dns_hasupdates' ) ) ) {
         echo "DNS Records have changed... Writing new/updated records..." . fs_filehandler::NewLine();
@@ -134,17 +134,15 @@ function WriteDNSNamedHook()
     $line       = "";
     foreach ( $domains as $domain ) {
         echo "CHECKING ZONE FILE: " . ctrl_options::GetSystemOption( 'zone_dir' ) . $domain . ".txt..." . fs_filehandler::NewLine();
-        system(
-            ctrl_options::GetSystemOption( 'named_checkzone' ) .
-            " " .
-            escapeshellarg( $domain ) .
-            " " .
-            escapeshellarg( ctrl_options::GetSystemOption( 'zone_dir' ) ) .
-            escapeshellarg( $domain ) .
-            ".txt"
-            , $retval
+        
+        
+        $command = ctrl_options::GetSystemOption( 'named_checkzone' );
+        $args = array(
+            $domain,
+            ctrl_options::GetSystemOption( 'zone_dir' ) . $domain . ".txt",
         );
-        echo $retval . fs_filehandler::NewLine();
+        $retval  = ctrl_system::systemCommand( $command, $args );
+
         if ( $retval == 0 ) {
             echo "Syntax check passed. Adding zone to " . ctrl_options::GetSystemOption( 'named_conf' ) . fs_filehandler::NewLine();
             $line .= "zone \"" . $domain . "\" IN {" . fs_filehandler::NewLine();

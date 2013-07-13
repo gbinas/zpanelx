@@ -98,7 +98,7 @@ class PMA_Config
      */
     function checkSystem()
     {
-        $this->set('PMA_VERSION', '3.5.4');
+        $this->set('PMA_VERSION', '3.5.8.1');
         /**
          * @deprecated
          */
@@ -208,13 +208,36 @@ class PMA_Config
         )) {
             $this->set('PMA_USR_BROWSER_VER', $log_version[2]);
             $this->set('PMA_USR_BROWSER_AGENT', 'KONQUEROR');
+            // must check Chrome before Safari
+        } elseif (preg_match(
+            '@Mozilla/([0-9].[0-9]{1,2})@',
+            $HTTP_USER_AGENT,
+            $log_version)
+            && preg_match('@Chrome/([0-9]*)@', $HTTP_USER_AGENT, $log_version2)
+        ) {
+            $this->set('PMA_USR_BROWSER_VER', $log_version[1] . '.' . $log_version2[1]);
+            $this->set('PMA_USR_BROWSER_AGENT', 'CHROME');
+            // newer Safari
+        } elseif (preg_match(
+            '@Mozilla/([0-9].[0-9]{1,2})@',
+            $HTTP_USER_AGENT,
+            $log_version)
+            && preg_match('@Version/(.*) Safari@', $HTTP_USER_AGENT, $log_version2)
+        ) {
+            $this->set('PMA_USR_BROWSER_VER', $log_version2[1]);
+            $this->set('PMA_USR_BROWSER_AGENT', 'CHROME');
+            // older Safari
         } elseif (preg_match(
             '@Mozilla/([0-9].[0-9]{1,2})@',
             $HTTP_USER_AGENT,
             $log_version)
             && preg_match('@Safari/([0-9]*)@', $HTTP_USER_AGENT, $log_version2)
         ) {
-            $this->set('PMA_USR_BROWSER_VER', $log_version[1] . '.' . $log_version2[1]);
+            $this->set('PMA_USR_BROWSER_VER',
+                $log_version[1] 
+                . '.' 
+                . $log_version2[1]
+            );
             $this->set('PMA_USR_BROWSER_AGENT', 'SAFARI');
         } elseif (preg_match('@rv:1.9(.*)Gecko@', $HTTP_USER_AGENT)) {
             $this->set('PMA_USR_BROWSER_VER', '1.9');
@@ -1374,7 +1397,7 @@ class PMA_Config
      */
     function setCookie($cookie, $value, $default = null, $validity = null, $httponly = true)
     {
-        if ($validity == null) {
+        if ($validity === null) {
             $validity = 2592000;
         }
         if (strlen($value) && null !== $default && $value === $default) {
