@@ -65,7 +65,7 @@
                     <form action="./?module=aliases&action=CreateAlias" method="post">
                         <table class="table table-striped">
                             <tr>
-                                <th nowrap="nowrap"><: Alias Address :>:</th>
+                                <th nowrap="nowrap"><: Alias Address :>:<br/><small>leave empty for catch-all</small></th>
                                 <td nowrap="nowrap">
                                     <input type="text" name="inAddress" id="inAddress" />
                                 </td>
