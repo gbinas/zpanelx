@@ -7,8 +7,8 @@
     <meta name="description" content="Web Hosting Control Panel">
 
     <!-- styles -->
-    <link href="<# ui_tpl_assetfolderpath #>css/bootstrap.css" rel="stylesheet">
-    <link href="<# ui_tpl_assetfolderpath #>css/style.css" rel="stylesheet">
+    <link href="<# ui_tpl_assetfolderpath #>global-css/bootstrap.css" rel="stylesheet">
+    <link href="<# ui_tpl_csspath #>" rel="stylesheet" type="text/css">
 
     <script src="<# ui_tpl_assetfolderpath #>js/jquery.js"></script>
     <script src="<# ui_tpl_assetfolderpath #>js/jquery.cookie.js"></script>
@@ -16,20 +16,29 @@
     <script src="<# ui_tpl_assetfolderpath #>js/spin.min.js"></script>
     <script src="<# ui_tpl_assetfolderpath #>js/zpanel.js"></script>
 
-
     <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
     <!--[if lt IE 9]>
       <script src="<# ui_tpl_assetfolderpath #>js/html5shiv.js"></script>
     <![endif]-->
 
-
-
-    <!-- Fav and touch icons -->
-    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="<# ui_tpl_assetfolderpath #>img/ico/apple-touch-icon-144-precomposed.png">
+    <!-- Favicons -->
+    <link rel="apple-touch-icon-precomposed" sizes="57x57"   href="<# ui_tpl_assetfolderpath #>img/ico/apple-touch-icon-57-precomposed.png">
     <link rel="apple-touch-icon-precomposed" sizes="114x114" href="<# ui_tpl_assetfolderpath #>img/ico/apple-touch-icon-114-precomposed.png">
-    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="<# ui_tpl_assetfolderpath #>img/ico/apple-touch-icon-72-precomposed.png">
-    <link rel="apple-touch-icon-precomposed" href="<# ui_tpl_assetfolderpath #>img/ico/apple-touch-icon-57-precomposed.png">
-    <link rel="shortcut icon" href="<# ui_tpl_assetfolderpath #>img/ico/favicon.png">
+    <link rel="apple-touch-icon-precomposed" sizes="72x72"   href="<# ui_tpl_assetfolderpath #>img/ico/apple-touch-icon-72-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="<# ui_tpl_assetfolderpath #>img/ico/apple-touch-icon-144-precomposed.png">
+
+    <link rel="icon" href="<# ui_tpl_assetfolderpath #>img/ico/fav16.png"  sizes="16x16"   type="image/png">
+    <link rel="icon" href="<# ui_tpl_assetfolderpath #>img/ico/fav32.png"  sizes="32x32"   type="image/png">
+    <link rel="icon" href="<# ui_tpl_assetfolderpath #>img/ico/fav48.png"  sizes="48x48"   type="image/png">
+    <link rel="icon" href="<# ui_tpl_assetfolderpath #>img/ico/fav64.png"  sizes="64x64"   type="image/png">
+    <link rel="icon" href="<# ui_tpl_assetfolderpath #>img/ico/fav128.png" sizes="128x128" type="image/png">
+
+    <link rel="icon" href="<# ui_tpl_assetfolderpath #>img/ico/fav32.png">
+    <!--[if IE]><link rel="shortcut icon" href="<# ui_tpl_assetfolderpath #>img/ico/favicon.ico"><![endif]-->
+
+    <meta name="msapplication-TileColor" content="#222222">
+    <meta name="msapplication-TileImage" content="<# ui_tpl_assetfolderpath #>img/ico/fav144.png">
+
   </head>
 
   <body>
@@ -64,9 +73,9 @@
 
     <!-- BEGIN CONTAINER -->
     <div class="wrap container">
-        <form>
+        <div id="module-search-wrap" class="visible-lg visible-desktop">
           <input type="text" id="module-search" data-provide="typeahead" placeholder="Search" autocomplete="off">
-        </form>
+        </div>
        <div class="inner-wrap">
         <!-- BEGIN LEFT SIDEBAR -->
         <div id="page-sidebar" class="col-lg-3 visible-desktop">
@@ -83,6 +92,7 @@
         <!-- BEGIN PAGE-CONTENT -->
         <div id="page-content" class="col-lg-9">
 
+        <# ui_tpl_shadowbar #>
 
         <!-- BEGIN STATSDATA -->
         <div id="stats-data" class="collapse">
@@ -272,9 +282,10 @@
     <script src="<# ui_tpl_assetfolderpath #>js/bootstrap-button.js"></script>
     <script src="<# ui_tpl_assetfolderpath #>js/bootstrap-collapse.js"></script>
     <script src="<# ui_tpl_assetfolderpath #>js/bootstrap-carousel.js"></script>
-    <script src="<# ui_tpl_assetfolderpath #>js/bootstrap-typeahead.js"></script>
+    <script src="<# ui_tpl_assetfolderpath #>js/typeahead.min.js"></script>
     <!-- <script type="text/javascript" src="<# ui_tpl_assetfolderpath #>/inc/init.js"></script> -->
-     <!-- Modulelist for Typeahead -->
+
+    <!-- Modulelist for Typeahead -->
     <script>
       var moduleJsonData = <# ui_tpl_modulelistjson #>;
       zPanel.modules.typeAhead(moduleJsonData);
