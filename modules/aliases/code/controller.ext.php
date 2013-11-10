@@ -205,11 +205,15 @@ class module_controller {
         global $controller;
         $fulladdress = $address . "@" . $domain;
         $destination = strtolower(str_replace(' ', '', $destination));
-        if (fs_director::CheckForEmptyValue($address)) {
-            self::$noaddress = true;
-            return false;
-        }
-        if (!self::IsValidEmail($fulladdress)) {
+
+	    //Allow empty address for catch-all rule
+        //if (fs_director::CheckForEmptyValue($address)) {
+        //    self::$noaddress = true;
+        //    return false;
+        //}
+
+	    //Check Valid email, accept empty address for catch-all rule
+        if (!self::IsValidEmail($fulladdress) && !($fulladdress == "@" . $domain)) {
             self::$validemail = true;
             return false;
         }
