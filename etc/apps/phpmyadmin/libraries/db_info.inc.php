@@ -5,7 +5,7 @@
  * tables if possible
  *
  * fills tooltip arrays and provides $tables, $num_tables, $is_show_stats
- * and $db_is_information_schema
+ * and $db_is_system_schema
  *
  * speedup view on locked tables
  *
@@ -96,11 +96,11 @@ $is_show_stats = $cfg['ShowStats'];
 /**
  * @global bool whether selected db is information_schema
  */
-$db_is_information_schema = false;
+$db_is_system_schema = false;
 
 if (PMA_is_system_schema($db)) {
     $is_show_stats = false;
-    $db_is_information_schema = true;
+    $db_is_system_schema = true;
 }
 
 /**

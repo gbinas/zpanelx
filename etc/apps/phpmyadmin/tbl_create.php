@@ -352,6 +352,9 @@ if (isset($_REQUEST['do_save_data'])) {
     }
 } // end do create table
 
+//This global variable needs to be reset for the headerclass to function properly
+$GLOBAL['table'] = '';
+
 /**
  * Displays the form used to define the structure of the table
  */

@@ -32,4 +32,3 @@ require_once './libraries/display_import.lib.php';
  */
 require './libraries/footer.inc.php';
 ?>
-

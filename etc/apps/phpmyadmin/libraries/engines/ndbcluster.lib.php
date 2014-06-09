@@ -8,12 +8,12 @@
  *
  * @package PhpMyAdmin-Engines
  */
-class PMA_StorageEngine_ndbcluster extends PMA_StorageEngine
+class PMA_StorageEngine_Ndbcluster extends PMA_StorageEngine
 {
     /**
      * @return  array
      */
-    function getVariables()
+    public function getVariables()
     {
         return array(
             'ndb_connectstring' => array(
@@ -24,7 +24,7 @@ class PMA_StorageEngine_ndbcluster extends PMA_StorageEngine
     /**
      * @return  string  SQL query LIKE pattern
      */
-    function getVariablesLikePattern()
+    public function getVariablesLikePattern()
     {
         return 'ndb\\_%';
     }
@@ -35,7 +35,7 @@ class PMA_StorageEngine_ndbcluster extends PMA_StorageEngine
      *
      * @return  string  mysql helppage filename
      */
-    function getMysqlHelpPage()
+    public function getMysqlHelpPage()
     {
         return 'ndbcluster';
     }

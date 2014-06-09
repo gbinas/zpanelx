@@ -3,37 +3,40 @@
 /**
  * Functions for listing directories
  *
- * @todo rename to file_listing.lib.php
  * @package PhpMyAdmin
  */
+if (! defined('PHPMYADMIN')) {
+    exit;
+}
 
 /**
  * Returns array of filtered file names
  *
  * @param string $dir        directory to list
  * @param string $expression regular expression to match files
+ *
  * @return array   sorted file list on success, false on failure
  */
 function PMA_getDirContent($dir, $expression = '')
 {
-    if (file_exists($dir) && $handle = @opendir($dir)) {
-        $result = array();
-        if (substr($dir, -1) != '/') {
-            $dir .= '/';
-        }
-        while ($file = @readdir($handle)) {
-        // for PHP < 5.2.4, is_file() gives a warning when using open_basedir
-        // and verifying '..' or '.'
-            if ('.' != $file && '..' != $file && is_file($dir . $file) && ($expression == '' || preg_match($expression, $file))) {
-                $result[] = $file;
-            }
-        }
-        @closedir($handle);
-        asort($result);
-        return $result;
-    } else {
+    if (!file_exists($dir) || !($handle = @opendir($dir))) {
         return false;
     }
+
+    $result = array();
+    if (substr($dir, -1) != '/') {
+        $dir .= '/';
+    }
+    while ($file = @readdir($handle)) {
+        if (is_file($dir . $file)
+            && ($expression == '' || preg_match($expression, $file))
+        ) {
+            $result[] = $file;
+        }
+    }
+    @closedir($handle);
+    asort($result);
+    return $result;
 }
 
 /**
@@ -42,6 +45,7 @@ function PMA_getDirContent($dir, $expression = '')
  * @param string $dir        directory to list
  * @param string $extensions regullar expression to match files
  * @param string $active     currently active choice
+ *
  * @return array   sorted file list on success, false on failure
  */
 function PMA_getFileSelectOptions($dir, $extensions = '', $active = '')
@@ -51,8 +55,8 @@ function PMA_getFileSelectOptions($dir, $extensions = '', $active = '')
         return false;
     }
     $result = '';
-    foreach ($list as $key => $val) {
-        $result .= '<option value="'. htmlspecialchars($val) . '"';
+    foreach ($list as $val) {
+        $result .= '<option value="' . htmlspecialchars($val) . '"';
         if ($val == $active) {
             $result .= ' selected="selected"';
         }
@@ -64,7 +68,7 @@ function PMA_getFileSelectOptions($dir, $extensions = '', $active = '')
 /**
  * Get currently supported decompressions.
  *
- * @return string | separated list of extensions usable in PMA_getDirContent
+ * @return string separated list of extensions usable in PMA_getDirContent
  */
 function PMA_supportedDecompressions()
 {
