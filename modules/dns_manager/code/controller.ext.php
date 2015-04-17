@@ -369,6 +369,7 @@ class module_controller
         $line .= $zone_message;
         $line .= "</td></tr></table>";
         $line .= '</div>';
+        $line .= '</div>';
 
 
         $line .='

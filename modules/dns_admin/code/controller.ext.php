@@ -252,7 +252,7 @@ class module_controller
 
 
 
-        $line .= "</div>";
+        //$line .= "</div>";
         $line .= "</div>";
         $line .= "</div>";
         $line .= "</div>";
